@@ -1,5 +1,5 @@
 # ScoreboardLib
-A flicker-free scoreboard library with support of text that are up to 48 characters.
+A flicker-free scoreboard library with support of text up to 48 characters.
 
 What is ScoreboardLib?
 --------------
