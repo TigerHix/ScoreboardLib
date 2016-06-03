@@ -23,19 +23,6 @@
         </repository>
     </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>org</groupId>
-            <artifactId>spigotmc.api</artifactId>
-            <version>1.8.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org</groupId>
-            <artifactId>spigotmc</artifactId>
-            <version>1.8.8</version>
-        </dependency>
-    </dependencies>
-
     <distributionManagement>
         <snapshotRepository>
             <id>nexus</id>
