@@ -4,6 +4,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import me.tigerhix.lib.scoreboard.ScoreboardLib;
 import me.tigerhix.lib.scoreboard.common.Strings;
+import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -36,6 +37,7 @@ public class SimpleScoreboard implements Scoreboard {
     private Map<FakePlayer, Integer> entryCache = new ConcurrentHashMap<>();
     private Table<String, Integer, FakePlayer> playerCache = HashBasedTable.create();
     private Table<Team, String, String> teamCache = HashBasedTable.create();
+    private Map<Integer, Entry> previousEntries = new HashMap<>();
     private BukkitRunnable updateTask;
 
     public SimpleScoreboard(Player holder) {
@@ -143,9 +145,10 @@ public class SimpleScoreboard implements Scoreboard {
             if (!appeared.containsKey(appearance)) appeared.put(appearance, -1);
             appeared.put(appearance, appeared.get(appearance) + 1);
             // Get fake player
-            FakePlayer faker = getFakePlayer(key, appeared.get(appearance));
+            FakePlayer faker = getFakePlayer(key, appeared.get(appearance), score);
             // Set score
-            objective.getScore(faker).setScore(score);
+            //if(objective.getScore(faker).getScore() != score)
+            //objective.getScore(faker).setScore(score);
             // Update references
             entryCache.put(faker, score);
             current.put(faker, score);
@@ -155,13 +158,14 @@ public class SimpleScoreboard implements Scoreboard {
         for (FakePlayer fakePlayer : entryCache.keySet()) {
             if (!current.containsKey(fakePlayer)) {
                 entryCache.remove(fakePlayer);
-                scoreboard.resetScores(fakePlayer.getName());
+                Bukkit.broadcastMessage(objective.getScore(fakePlayer).getScore() + " updated: " + MinecraftServer.currentTick);
+               //scoreboard.resetScores(fakePlayer.getName());
             }
         }
     }
 
     @SuppressWarnings("deprecation")
-    private FakePlayer getFakePlayer(String text, int offset) {
+    private FakePlayer getFakePlayer(String text, int offset, int score) {
         Team team = null;
         String name;
         // If the text has a length less than 16, teams need not to be be created
@@ -177,16 +181,27 @@ public class SimpleScoreboard implements Scoreboard {
             if (name.length() > 16) name = name.substring(0, 16);
             if (text.length() > 32) suffix = text.substring(32 - offset);
             // If teams already exist, use them
-            for (Team other : teamCache.rowKeySet()) {
-                if (other.getPrefix().equals(prefix) && other.getSuffix().equals(suffix)) {
-                    team = other;
-                }
-            }
+
+            team = scoreboard.getTeam(TEAM_PREFIX + score);
             // Otherwise create them
             if (team == null) {
                 team = scoreboard.registerNewTeam(TEAM_PREFIX + TEAM_COUNTER++);
                 team.setPrefix(prefix);
                 team.setSuffix(suffix);
+                teamCache.put(team, prefix, suffix);
+            } else {
+                if(objective.getScore(TEAM_PREFIX + score).getScore() != score) {
+                    objective.getScore(TEAM_PREFIX + score).setScore(score);
+                }
+                team.setPrefix(prefix);
+                team.setSuffix(suffix);
+                team.setDisplayName(name);
+                if(!team.getName().equals(name)) {
+                    scoreboard.resetScores(team.getName());
+                    team.removeEntry(team.getName());
+                    if(!team.hasEntry(team.getName()))
+                    team.addEntry(team.getName());
+                }
                 teamCache.put(team, prefix, suffix);
             }
         }
