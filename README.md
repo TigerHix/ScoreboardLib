@@ -36,7 +36,7 @@ Simply add the following to your `pom.xml`.
     <dependency>
         <groupId>com.github.jingwenMC</groupId>
         <artifactId>ScoreboardLib</artifactId>
-        <version>Tag</version>
+        <version>1.0.1</version>
     </dependency>
 
 Now you are able to create your own pretty scoreboards.
