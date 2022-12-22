@@ -38,6 +38,7 @@ jobs:
           git add .
           echo "Committing..."
           git commit -m "Auto update by Github Actions"
+          echo "Pushing..."
           git push --force
       - name: Auto Release
         id: create_release
