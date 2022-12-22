@@ -36,6 +36,7 @@ jobs:
           git config --global user.name "Github Actions User"
           cd /home/runner/MavenRepo
           git add .
+          echo "Committing..."
           git commit -m "Auto update by Github Actions"
           git push --force
       - name: Auto Release
