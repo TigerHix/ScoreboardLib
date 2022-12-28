@@ -1,4 +1,4 @@
-.idea/**
-output/**
-target/**
-/scoreboard.iml
+.idea/
+output/
+target/
+ScoreboardLib.iml
