@@ -26,15 +26,17 @@ How do I add it to my project?
 --------------
 Simply add the following to your `pom.xml`.
 
-    <repository>
-      <id>tiger-repo</id>
-      <url>http://repo.tigerhix.me/content/repositories/snapshots/</url>
-    </repository>
+    <repositories>
+        <repository>
+            <id>jingwenmc-repo</id>
+            <url>https://raw.githubusercontent.com/jingwenMC/MavenRepo/master</url>
+        </repository>
+    </repositories>
 
     <dependency>
-      <groupId>me.tigerhix.lib</groupId>
-      <artifactId>scoreboard</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+        <groupId>me.tigerhix.lib</groupId>
+        <artifactId>scoreboard</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
     </dependency>
 
 Now you are able to create your own pretty scoreboards.
