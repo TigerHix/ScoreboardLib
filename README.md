@@ -36,7 +36,7 @@ Simply add the following to your `pom.xml`.
     <dependency>
         <groupId>com.github.TigerHix</groupId>
         <artifactId>ScoreboardLib</artifactId>
-        <version>-SNAPSHOT</version>
+        <version>master-SNAPSHOT</version>
     </dependency>
 
 Now you are able to create your own pretty scoreboards.
