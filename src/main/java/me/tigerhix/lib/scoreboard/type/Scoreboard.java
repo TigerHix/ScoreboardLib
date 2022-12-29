@@ -62,4 +62,19 @@ public interface Scoreboard {
      */
     Player getHolder();
 
+    /**
+     * Check if the scoreboard update task is async
+     *
+     * @return If the task should be async
+     */
+    boolean isAsync();
+
+    /**
+     * Update the async option
+     *
+     * @param value If the async option is enabled
+     * @return The updated value
+     */
+    Scoreboard setAsync(boolean value);
+
 }
