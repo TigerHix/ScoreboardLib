@@ -27,8 +27,8 @@ How do I add it to my project?
 Simply add the following to your `pom.xml`.
 
     <repository>
-      <id>tiger-repo</id>
-      <url>http://repo.tigerhix.me/content/repositories/snapshots/</url>
+        <id>jingwenmc-repo</id>
+        <url>https://raw.githubusercontent.com/jingwenMC/MavenRepo/master</url>
     </repository>
 
     <dependency>
