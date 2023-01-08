@@ -22,8 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleScoreboard implements Scoreboard {
 
-    private static final String TEAM_PREFIX = "Scoreboard_";
-    private static int TEAM_COUNTER = 0;
+    private static final String TEAM_PREFIX = "S";
+    private int TEAM_COUNTER = 0;
 
     private final org.bukkit.scoreboard.Scoreboard scoreboard;
     private final Objective objective;
@@ -267,10 +267,6 @@ public class SimpleScoreboard implements Scoreboard {
         @Override
         public boolean isBanned() {
             return false;
-        }
-
-        @Override
-        public void setBanned(boolean banned) {
         }
 
         @Override
